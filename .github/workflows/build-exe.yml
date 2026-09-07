@@ -1,0 +1,65 @@
+name: Build Windows executable
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install package + PyInstaller
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]" "pyinstaller>=6.0"
+
+      - name: Assert no AGPL PDF engine
+        run: |
+          python -c "import importlib.util,sys; sys.exit(1 if importlib.util.find_spec('fitz') or importlib.util.find_spec('pymupdf') else 0)"
+
+      - name: Build onedir (with CLI, for the selftest)
+        env:
+          PRISMA_S_BUILD_CLI: '1'
+        run: python -m PyInstaller --clean --noconfirm desktop/prisma-s.spec
+
+      - name: Verify bundled resources
+        shell: pwsh
+        run: |
+          $p = "dist/PRISMA-S-Lit-Review/_internal/prisma_s/data/keyword_dictionary_v1.3.csv"
+          if (-not (Test-Path $p)) { throw "missing bundled data: $p" }
+
+      - name: Selftest the built executable
+        run: |
+          dist/PRISMA-S-Lit-Review/prisma-s.exe selftest
+          dist/PRISMA-S-Lit-Review/prisma-s.exe --version
+
+      - name: Package
+        id: pack
+        shell: pwsh
+        run: |
+          $version = (python -c "import prisma_s; print(prisma_s.__version__)").Trim()
+          $zip = "PRISMA-S-Lit-Review-$version-win64.zip"
+          Compress-Archive -Path dist/PRISMA-S-Lit-Review -DestinationPath $zip
+          "zip=$zip" >> $env:GITHUB_OUTPUT
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.pack.outputs.zip }}
+          path: ${{ steps.pack.outputs.zip }}
+
+      - name: Attach to release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ steps.pack.outputs.zip }}
