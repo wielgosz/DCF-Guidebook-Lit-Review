@@ -12,8 +12,8 @@ import csv
 import hashlib
 import json
 import os
-import signal
 import sys
+import threading
 import time
 import traceback
 import unicodedata
@@ -25,9 +25,16 @@ import pandas as pd
 import yaml
 
 try:
+    import pypdf
+except Exception:  # pragma: no cover
+    pypdf = None
+
+try:  # Optional legacy extractor (AGPL); only used when params ask for it.
     import fitz  # PyMuPDF
 except Exception:  # pragma: no cover
     fitz = None
+
+PAGE_BREAK = "\n\n[[PRISMA_PAGE_BREAK]]\n\n"
 
 BLOCKING_STATUSES = {"EXTRACTION_TIMEOUT", "EXTRACTION_ERROR", "MISSING_PDF", "EMPTY_TEXT"}
 
@@ -36,8 +43,28 @@ class TimeoutErrorForDocument(Exception):
     pass
 
 
-def _timeout_handler(signum, frame):  # pragma: no cover - signal behavior
-    raise TimeoutErrorForDocument("document extraction timed out")
+def run_with_timeout(func, timeout_seconds: int, *args):
+    """Run func(*args) on a worker thread; raise TimeoutErrorForDocument on timeout.
+
+    Thread-based so it works on Windows (SIGALRM is POSIX-only). A timed-out
+    worker cannot be killed, but it is a daemon thread and the run moves on.
+    """
+    box: Dict[str, Any] = {}
+
+    def target() -> None:
+        try:
+            box["result"] = func(*args)
+        except BaseException as exc:  # pragma: no cover - re-raised below
+            box["error"] = exc
+
+    worker = threading.Thread(target=target, daemon=True)
+    worker.start()
+    worker.join(timeout_seconds)
+    if worker.is_alive():
+        raise TimeoutErrorForDocument(f"document extraction timed out after {timeout_seconds}s")
+    if "error" in box:
+        raise box["error"]
+    return box["result"]
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -83,12 +110,41 @@ def extract_pdf_pymupdf(pdf_path: Path) -> Tuple[str, int, List[int], List[bool]
             pages.append(page_text)
             page_char_counts.append(len(page_text))
             empty_page_flags.append(len(page_text.strip()) == 0)
-        return "\n\n[[PRISMA_PAGE_BREAK]]\n\n".join(pages), doc.page_count, page_char_counts, empty_page_flags
+        return PAGE_BREAK.join(pages), doc.page_count, page_char_counts, empty_page_flags
     finally:
         doc.close()
 
 
+def extract_pdf_pypdf(pdf_path: Path) -> Tuple[str, int, List[int], List[bool]]:
+    if pypdf is None:
+        raise RuntimeError("pypdf is not installed; install the runner requirements.")
+    reader = pypdf.PdfReader(str(pdf_path))
+    pages: List[str] = []
+    page_char_counts: List[int] = []
+    empty_page_flags: List[bool] = []
+    for page in reader.pages:
+        page_text = page.extract_text() or ""
+        pages.append(page_text)
+        page_char_counts.append(len(page_text))
+        empty_page_flags.append(len(page_text.strip()) == 0)
+    return PAGE_BREAK.join(pages), len(reader.pages), page_char_counts, empty_page_flags
+
+
+def choose_extractor(params: Dict[str, Any]):
+    """Return (name, version, function) for the configured extractor (default pypdf)."""
+    name = str(params.get("primary_extractor", "pypdf")).lower()
+    if name == "pymupdf" and fitz is not None:
+        return "pymupdf", getattr(fitz, "version", ("", "", ""))[0], extract_pdf_pymupdf
+    version = getattr(pypdf, "__version__", "") if pypdf is not None else "not_installed"
+    return "pypdf", version, extract_pdf_pypdf
+
+
 def resolve_pdf_path(row: pd.Series, pdf_root: Path) -> Optional[Path]:
+    # A manifest from the corpus register carries the resolved absolute path.
+    if "pdf_path" in row and pd.notna(row["pdf_path"]) and str(row["pdf_path"]).strip():
+        candidate = Path(str(row["pdf_path"]).strip())
+        if candidate.is_absolute() and candidate.exists():
+            return candidate
     for col in ["file_name", "pdf_file", "pdf_filename", "filename"]:
         if col in row and pd.notna(row[col]) and str(row[col]).strip():
             candidate = pdf_root / str(row[col]).strip()
@@ -120,6 +176,7 @@ def extract_one(row: pd.Series, pdf_root: Path, text_dir: Path, norm_dir: Path, 
     previous_doc_id = str(row.get("previous_doc_id", row.get("baseline_v13_doc_id", ""))).strip()
     file_name = str(row.get("file_name", "")).strip()
     started = time.time()
+    extractor_name, extractor_version, extractor = choose_extractor(params)
     record: Dict[str, Any] = {
         "doc_id": doc_id,
         "previous_doc_id": previous_doc_id,
@@ -129,8 +186,8 @@ def extract_one(row: pd.Series, pdf_root: Path, text_dir: Path, norm_dir: Path, 
         "status": "PENDING",
         "warning_flags": "",
         "error_message": "",
-        "extractor": "pymupdf",
-        "extractor_version": getattr(fitz, "version", ("", "", ""))[0] if fitz is not None else "not_installed",
+        "extractor": extractor_name,
+        "extractor_version": extractor_version,
         "started_at_epoch": started,
         "finished_at_epoch": "",
         "duration_seconds": "",
@@ -158,13 +215,7 @@ def extract_one(row: pd.Series, pdf_root: Path, text_dir: Path, norm_dir: Path, 
         record["pdf_size_bytes"] = pdf_path.stat().st_size
         timeout_seconds = int(params.get("per_document_timeout_seconds", 180))
         try:
-            old_handler = signal.signal(signal.SIGALRM, _timeout_handler)
-            signal.alarm(timeout_seconds)
-            try:
-                raw_text, page_count, page_counts, empty_flags = extract_pdf_pymupdf(pdf_path)
-            finally:
-                signal.alarm(0)
-                signal.signal(signal.SIGALRM, old_handler)
+            raw_text, page_count, page_counts, empty_flags = run_with_timeout(extractor, timeout_seconds, pdf_path)
             text = normalize_text(raw_text, params)
             norm_text = hashable_text(text, params)
             text_path = text_dir / f"{doc_id}.txt"

@@ -7,6 +7,48 @@ Versioning follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
+## [Desktop runner 2.3.0] - 2026-10-06
+
+Applies to `desktop_runner/runner/` only; the `prisma_s` package is unchanged.
+
+### Changed - BREAKING
+- **Reference tables are CSV files** in `desktop_runner/runner/reference_tables/`
+  (A1, B1 corpus register, keyword dictionary, exclusions, C1 dataset registry,
+  crosswalk, extraction patterns, run settings), versioned with the tool
+  (tables 2.30 = tool 2.3.0) via `TABLES_VERSION.json`. The Excel input
+  workbook (`Supply_Chain_Data_Review_Input_Template_v2_2.xlsx`) is removed.
+- **No baseline workbook dependency.** The v1.3 results workbook under
+  `outputs/reference_milestone/` (never in git) is no longer required; text and
+  matrix comparisons run only against an explicit reference folder.
+- **Bundled example snapshots removed** from the runner
+  (`desktop_runner/runner/protocol_v2_1/examples/`), including the figure
+  templates that step 07 read as a data source.
+- Text extraction uses **pypdf** (pinned as in the package); PyMuPDF is no
+  longer a runner dependency.
+- Backend stages run **in-process**, so the PyInstaller build works.
+
+### Added
+- Corpus register validation (`--register-only` / "Validate corpus register"):
+  file presence, exclusions, duplicates, organisations, APA year/title/URL
+  consistency, title-on-PDF check, optional link check, reconciliation with a
+  publication template's Table B1, and proposed corrected tables.
+- Publication template filling with the RDI header block preserved; generic
+  template derived from the RDI format; D1 vs template comparison.
+- Figures 1-3 from a YAML style file (`templates/figure_style.yml`),
+  byte-reproducible SVG + PNG.
+- `run_manifest.json` with SHA-256 of every input and figure.
+- `--selftest`, tests, `build_windows.bat`, `setup.bat`, `run_gui.bat`,
+  `run_cli.bat`, PyInstaller spec, `build-runner-exe` workflow.
+
+### Fixed
+- Windows: per-document extraction timeout no longer uses POSIX-only SIGALRM.
+- Dataset stage A read the `pattern_type` column instead of `pattern`; stage B
+  joined on `dataset_id` where the v1.5 crosswalk uses `mapped_dataset_id`;
+  stage A page numbers ignored the page-break marker.
+- Keyword counting no longer refuses a dictionary whose active term count is
+  not 98 unless a count is configured.
+- Multi-organisation `publishing_org_id` values (`ORG-047; ORG-035`) validate.
+
 ## [1.6.0] - 2026-09-02
 
 ### Changed - BREAKING

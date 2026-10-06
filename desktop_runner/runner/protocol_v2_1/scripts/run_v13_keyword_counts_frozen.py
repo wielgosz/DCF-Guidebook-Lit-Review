@@ -55,7 +55,8 @@ def main() -> int:
     args = ap.parse_args()
 
     params = yaml.safe_load(Path(args.params).read_text(encoding="utf-8")) if Path(args.params).exists() else {}
-    expected_terms = int(params.get("keyword_counting", {}).get("active_dictionary_terms_expected", 98))
+    # Enforced only when the params file pins a count (v1.5 params pin 98).
+    expected_terms = params.get("keyword_counting", {}).get("active_dictionary_terms_expected")
     declared_rule = params.get("keyword_counting", {}).get("matching_rule", MATCHING_RULE)
     if declared_rule != MATCHING_RULE:
         raise SystemExit(f"Refusing run: params matching_rule={declared_rule!r}; required={MATCHING_RULE!r}")
@@ -73,7 +74,7 @@ def main() -> int:
     term_col = "canonical_term" if "canonical_term" in dictionary.columns else "term"
     variant_col = "search_variant" if "search_variant" in dictionary.columns else "variant"
     active_terms = dictionary[term_col].dropna().astype(str).nunique()
-    if active_terms != expected_terms:
+    if expected_terms is not None and active_terms != int(expected_terms):
         raise SystemExit(f"Refusing run: active canonical terms={active_terms}; expected v1.3={expected_terms}")
 
     count_rows = []

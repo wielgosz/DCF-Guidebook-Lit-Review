@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Validate a frozen extracted-text corpus against a v1.3 Text_Extraction_QA baseline."""
+"""Validate a frozen extracted-text corpus.
+
+Extraction-status checks always run. Comparison against a reference
+Text_Extraction_QA table (page and character counts) runs only when
+--baseline is given and exists; without one, rows are marked NO_REFERENCE.
+"""
 from __future__ import annotations
 
 import argparse
@@ -29,7 +34,7 @@ def first_existing_col(df: pd.DataFrame, names: list[str]) -> Optional[str]:
 def main() -> int:
     ap = argparse.ArgumentParser(description="Compare frozen text manifest to a prior Text_Extraction_QA baseline.")
     ap.add_argument("--manifest", required=True, help="Frozen text manifest CSV.")
-    ap.add_argument("--baseline", required=True, help="v1.3 Text_Extraction_QA workbook or CSV.")
+    ap.add_argument("--baseline", default="", help="Optional reference Text_Extraction_QA workbook or CSV.")
     ap.add_argument("--baseline-sheet", default="Text_Extraction_QA", help="Sheet name if baseline is workbook.")
     ap.add_argument("--out", required=True, help="Output CSV path for QA report.")
     ap.add_argument("--params", default="config/frozen_text_protocol_params_v1_5.yml")
@@ -41,7 +46,8 @@ def main() -> int:
     page_must_match = bool(thresholds.get("page_count_must_match_baseline", True))
 
     current = pd.read_csv(args.manifest)
-    baseline = load_table(args.baseline, args.baseline_sheet)
+    has_reference = bool(args.baseline) and Path(args.baseline).exists()
+    baseline = load_table(args.baseline, args.baseline_sheet) if has_reference else pd.DataFrame()
 
     base_doc_col = first_existing_col(baseline, ["doc_id", "document_id", "Doc ID"])
     base_file_col = first_existing_col(baseline, ["file_name", "filename", "pdf_filename"])
@@ -72,10 +78,13 @@ def main() -> int:
         b = baseline_by_doc.get(cur_key) or baseline_by_file.get(cur_file)
         status = str(r.get("status", ""))
         flags = []
-        if b is None:
+        if not has_reference:
+            flags.append("NO_REFERENCE")
+            base_page = base_char = base_hash = ""
+        elif b is None:
             flags.append("NO_BASELINE_ROW")
             base_page = base_char = base_hash = ""
-        else:
+        else:  # compare against the reference row
             base_page = b.get(base_page_col, "") if base_page_col else ""
             base_char = b.get(base_char_col, "") if base_char_col else ""
             base_hash = b.get(base_hash_col, "") if base_hash_col else ""

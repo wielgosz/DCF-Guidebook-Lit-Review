@@ -215,7 +215,8 @@ def make_legacy_svg_bar_chart(
     for i, v in enumerate(data[value_col].tolist()):
         ax.text(float(v) + max(shared_xlim, 1) * 0.01, i, str(int(v)), va="center", fontsize=8)
     plt.tight_layout()
-    fig.savefig(out_path, format="svg")
+    fmt = out_path.suffix.lstrip(".").lower() or "svg"
+    fig.savefig(out_path, format=fmt, dpi=200 if fmt == "png" else None)
     plt.close(fig)
 
 

@@ -1,0 +1,28 @@
+protocol_version: v2.3
+inherits_keyword_protocol: v1.3
+purpose: >-
+  Frozen extracted-text corpus for the v2.3 desktop runner. Same layer as v1.5
+  but extracted with pypdf (permissive licence) instead of PyMuPDF (AGPL), with
+  a thread-based per-document timeout that works on Windows. Comparison to a
+  reference run is optional and driven by the runner's reference folder.
+extraction:
+  primary_extractor: pypdf
+  fallback_extractors: []
+  per_document_timeout_seconds: 180
+  normalize_line_endings: true
+  normalize_unicode: NFC
+  strip_trailing_whitespace: true
+  collapse_internal_whitespace_for_hash: false
+qa_thresholds:
+  char_count_relative_tolerance: 0.02
+  page_count_must_match_baseline: true
+  warn_on_empty_pages: true
+  block_on_unresolved_statuses:
+    - EXTRACTION_TIMEOUT
+    - EXTRACTION_ERROR
+    - MISSING_PDF
+    - EMPTY_TEXT
+keyword_counting:
+  matching_rule: exact_case_insensitive_regex_with_alphanumeric_boundaries
+  variant_rollup: canonical_term
+  consume_only_frozen_text: true

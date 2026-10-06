@@ -1,1 +1,3 @@
-__version__ = "2.2-alpha"
+"""Supply Chain Data Review desktop runner engine."""
+
+__version__ = "2.3.0"

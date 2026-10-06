@@ -1,0 +1,73 @@
+name: Build desktop runner (Windows)
+
+# Builds the Supply Chain Data Review desktop runner as a downloadable zip.
+# Tag runner-vX.Y.Z (matching desktop_runner/runner/protocol_engine/__init__.py)
+# to attach the zip to a GitHub Release.
+on:
+  push:
+    tags: ['runner-v*']
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+defaults:
+  run:
+    working-directory: desktop_runner/runner
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-build.txt
+
+      - name: Assert no AGPL PDF engine
+        run: python -c "import importlib.util,sys; sys.exit(1 if importlib.util.find_spec('fitz') or importlib.util.find_spec('pymupdf') else 0)"
+
+      - name: Tests (includes end-to-end selftest and tables-version check)
+        run: python -m pytest tests protocol_v2_1/tests -q
+
+      - name: Tag matches tool version
+        if: startsWith(github.ref, 'refs/tags/runner-v')
+        shell: pwsh
+        run: |
+          $v = (python -c "from protocol_engine import __version__; print(__version__)").Trim()
+          if ("runner-v$v" -ne "${{ github.ref_name }}") { throw "tag ${{ github.ref_name }} != runner-v$v" }
+
+      - name: Build
+        run: python -m PyInstaller --clean --noconfirm SupplyChainDataReview.spec
+
+      - name: Selftest the built app
+        shell: pwsh
+        run: |
+          $p = Start-Process -FilePath dist/SupplyChainDataReview/SupplyChainDataReview.exe -ArgumentList '--selftest' -Wait -PassThru
+          if ($p.ExitCode -ne 0) { throw "selftest failed ($($p.ExitCode))" }
+
+      - name: Package
+        id: pack
+        shell: pwsh
+        run: |
+          $ver = (python -c "from protocol_engine import __version__ as v; from protocol_engine.tables_version import tables_version_for as t; print(v + '-tables-' + t())").Trim()
+          $zip = "SupplyChainDataReview-$ver-win64.zip"
+          Compress-Archive -Path dist/SupplyChainDataReview -DestinationPath $zip
+          "zip=$zip" >> $env:GITHUB_OUTPUT
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.pack.outputs.zip }}
+          path: desktop_runner/runner/${{ steps.pack.outputs.zip }}
+
+      - name: Attach to release
+        if: startsWith(github.ref, 'refs/tags/runner-v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: desktop_runner/runner/${{ steps.pack.outputs.zip }}

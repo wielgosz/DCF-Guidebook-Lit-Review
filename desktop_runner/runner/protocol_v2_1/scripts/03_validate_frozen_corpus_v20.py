@@ -25,7 +25,7 @@ from pathlib import Path
 def main() -> int:
     ap = argparse.ArgumentParser(description="03 - Validate frozen text against v1.3 baseline.")
     ap.add_argument("--manifest", required=True)
-    ap.add_argument("--baseline", required=True)
+    ap.add_argument("--baseline", default="")
     ap.add_argument("--baseline-sheet", default="Text_Extraction_QA")
     ap.add_argument("--out", required=True)
     ap.add_argument("--params", default="config/protocol_v2_0_params.yml")

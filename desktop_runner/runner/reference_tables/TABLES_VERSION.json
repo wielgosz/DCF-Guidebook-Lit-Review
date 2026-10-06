@@ -1,0 +1,17 @@
+{
+  "tables_version": "2.30",
+  "tool_version": "2.3.0",
+  "released": "2026-10-06",
+  "notes": "First CSV edition of the reference tables, converted from the v2.2 input workbook tabs (A1, B1, Dictionary, Exclusions_Duplicates, Run_Settings) and the v1.5 dataset registry, crosswalk and extraction patterns.",
+  "files": {
+    "A1_organizations.csv": "25ac3b3a5971f92187103e3b77a4e663fb68d1e72002f19ed037c4d3d62ece91",
+    "B1_corpus_register.csv": "0ee6ff163513b58954c22c66c360a34df32fe68da78034e002f59bdb20910936",
+    "C1_dataset_registry.csv": "42959fed65f2afd49c754d12dba6241958d0e65dcdeb866120be79a4e7a1d48f",
+    "dataset_extraction_patterns.csv": "70bad49076a31228890875fb4fe37cd02570806af627bb0339e13b30376969cc",
+    "dataset_name_crosswalk.csv": "de98ebe2c3f9a4ec088e5b030b2a711649e73ba05d952bcdf1107ee42cf34f11",
+    "exclusions_duplicates.csv": "a3a88a133174649ffa1e0e500122b0622ed926bbc0aeae617118fd39cc52fd02",
+    "keyword_dictionary.csv": "98fcd2adbd00036a220bd38352e229705735c389fbc1689756e9c03a7015cd67",
+    "new_documents.csv": "a12bebfefa552f008f0bf805ef6e0f3c69c6f4759b3f4e9fdc900754e08e5f6e",
+    "run_settings.csv": "50e56a576fe24eaaae9936a0e7ef4a0862fabdc9ea13633b5cdafa8ea02a8e9a"
+  }
+}

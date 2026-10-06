@@ -4,7 +4,9 @@ from pathlib import Path
 import pandas as pd
 
 def read_text(path): return Path(path).read_text(encoding='utf-8', errors='ignore') if Path(path).exists() else ''
-def page_of_pos(text, pos): return text[:pos].count('[[PAGE ')+1
+def page_of_pos(text, pos):
+    head=text[:pos]
+    return head.count('[[PRISMA_PAGE_BREAK]]')+head.count('[[PAGE ')+1
 
 def main():
     ap=argparse.ArgumentParser()
@@ -17,7 +19,8 @@ def main():
     corpus=pd.read_csv(args.corpus)
     try:
         patterns=pd.read_csv(args.patterns)
-        terms=patterns.iloc[:,0].dropna().astype(str).unique().tolist()
+        col='pattern' if 'pattern' in patterns.columns else patterns.columns[0]
+        terms=patterns[col].dropna().astype(str).unique().tolist()
     except Exception:
         terms=['PRODES','DETER','MapBiomas','Global Forest Watch','GFW','Hansen','CAR','SICAR','IBAMA','INCRA','SIGEF','SNCI','FUNAI','WDPA','Landsat','Sentinel','MODIS','Planet','NICFI','Trase','SEI-PCS','GeoRSPO','Universal Mill List','dataset','database','satellite imagery','geospatial data','risk map']
     rows=[]

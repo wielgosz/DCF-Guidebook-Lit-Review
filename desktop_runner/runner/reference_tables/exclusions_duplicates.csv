@@ -1,0 +1,6 @@
+﻿file_name,rule,retain_file_name,notes
+ice-praesentation.pdf,EXCLUDE_CONFIDENTIAL_PENDING_HISTORY_CONFIRMATION,,Historical/user-indicated confidential exclusion review.
+responsible_sourcing_practical_guide_online_version (1).pdf,EXCLUDE_DUPLICATE,responsible_sourcing_practical_guide_online_version.pdf,Retain unnumbered canonical file.
+AFi Operational Guidance - Monitoring & Verification (2020-05).pdf,EXCLUDE_DUPLICATE,OG_Monitoring_Verification-2020-5.pdf,Retain OG canonical filename.
+AFi Operational Guidance - Supply Chain Management (2020-05).pdf,EXCLUDE_DUPLICATE,OG_Supply_Chain_Management-2020-5.pdf,Retain OG canonical filename.
+ofi Scaling FLRI whitepaper update.pdf,EXCLUDE_DUPLICATE,Satelligence FLRI whitepaper.pdf,Exact duplicate / retain Satelligence filename.

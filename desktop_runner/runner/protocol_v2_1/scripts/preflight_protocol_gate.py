@@ -17,11 +17,12 @@ def main() -> int:
     ap.add_argument("--qa-report", required=False)
     ap.add_argument("--params", default="config/frozen_text_protocol_params_v1_5.yml")
     ap.add_argument("--out", required=True)
+    ap.add_argument("--expected-terms", type=int, default=None, help="Expected active canonical term count; overrides params. Omit both to skip the check.")
     args = ap.parse_args()
 
     params = yaml.safe_load(Path(args.params).read_text(encoding="utf-8")) if Path(args.params).exists() else {}
     blocking_statuses = set(params.get("qa_thresholds", {}).get("block_on_unresolved_statuses", []))
-    expected_terms = int(params.get("keyword_counting", {}).get("active_dictionary_terms_expected", 98))
+    expected_terms = args.expected_terms if args.expected_terms is not None else params.get("keyword_counting", {}).get("active_dictionary_terms_expected")
     expected_rule = params.get("keyword_counting", {}).get("matching_rule", "exact_case_insensitive_regex_with_alphanumeric_boundaries")
 
     checks = []
@@ -37,7 +38,10 @@ def main() -> int:
     active = dictionary[dictionary.get("active", "yes").fillna("yes").astype(str).str.lower().eq("yes")]
     term_col = "canonical_term" if "canonical_term" in active.columns else "term"
     active_terms = active[term_col].dropna().astype(str).nunique()
-    add("active_dictionary_term_count_matches_v1_3", active_terms == expected_terms, f"actual={active_terms}; expected={expected_terms}")
+    if expected_terms is not None:
+        add("active_dictionary_term_count_matches_expected", active_terms == int(expected_terms), f"actual={active_terms}; expected={expected_terms}")
+    else:
+        add("active_dictionary_term_count_recorded", active_terms > 0, f"actual={active_terms}; no expected count configured")
     add("matching_rule_declared", expected_rule == "exact_case_insensitive_regex_with_alphanumeric_boundaries", expected_rule)
 
     if "status" in manifest.columns:

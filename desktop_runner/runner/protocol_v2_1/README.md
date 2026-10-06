@@ -39,7 +39,7 @@ python scripts/run_v20_full_protocol.py \
   --input-root data/input_batches \
   --out-root outputs/v20_final \
   --historical-v13 outputs/reference_milestone/prisma_s_v13_complete_results_QA_metadata_visuals_2026-05-13.xlsx \
-  --template examples/milestone/figure_template_v2_0.xlsx
+  --template <publication template .xlsx, optional>
 ```
 
 For first execution, place uploaded Batch ZIPs/PDFs in `data/input_batches/`. The wrapper will use the numbered module sequence and will stop on hard QA failures.
