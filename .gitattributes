@@ -3,3 +3,5 @@
 *.sh    text eol=lf
 *.ps1   text eol=crlf
 *.bat   text eol=crlf
+# Reference tables are hashed in TABLES_VERSION.json: keep their bytes exact on every checkout.
+desktop_runner/runner/reference_tables/*.csv -text
