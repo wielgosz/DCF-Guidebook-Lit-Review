@@ -66,6 +66,8 @@ def test_edited_copy_is_labelled_custom(tmp_path):
     ("ABIOVE. (2024). Cerrado Monitoring Report. https://abiove.org.br/x/", "2024", "Cerrado Monitoring Report", "https://abiove.org.br/x/"),
     ("Trase. (n.d.). Supply chain mapping manual. https://trase.earth.", "", "Supply chain mapping manual", "https://trase.earth"),
     ("WWF. (accessed 2026). DCF Toolkit. https://wwf.org/a", "2026", "DCF Toolkit", "https://wwf.org/a"),
+    ("Deutsche Gesellschaft für Internationale Zusammenarbeit (GIZ) GmbH, & Olab. (2026). AB+S dry-run. https://e.eu/x.pdf",
+     "2026", "AB+S dry-run", "https://e.eu/x.pdf"),
 ])
 def test_parse_apa(apa, year, title, url):
     p = parse_apa(apa)

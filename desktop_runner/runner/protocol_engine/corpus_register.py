@@ -44,7 +44,11 @@ from openpyxl.utils import get_column_letter
 
 Log = Callable[[str], None]
 
-APA_RE = re.compile(r"^(?P<author>.+?)\s*\((?P<date>[^)]*)\)\.?\s*(?P<rest>.*)$", re.S)
+# The date is the first parenthesis that looks like one, so "(GIZ)" in an author name is skipped.
+APA_RE = re.compile(
+    r"^(?P<author>.+?)\s*\((?P<date>(?:(?:19|20)\d{2}|n\.\s?d\.|accessed|in press)[^)]*)\)\.?\s*(?P<rest>.*)$",
+    re.S | re.I,
+)
 URL_RE = re.compile(r"https?://[^\s<>\"]+", re.I)
 YEAR_RE = re.compile(r"(19|20)\d{2}")
 STOPWORDS = {
