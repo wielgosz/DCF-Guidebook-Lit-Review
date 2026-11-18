@@ -1,10 +1,10 @@
 {
-  "tables_version": "2.40",
-  "tool_version": "2.4.0",
+  "tables_version": "2.41",
+  "tool_version": "2.4.1",
   "released": "2026-11-18",
-  "notes": "Default corpus is now the published guidebook's: Table A-1 (69 organisations) and Table B-1 (125 references) from the final figure template (v8.6), with no file names, no earlier-run state, and empty exclusions and staging tables. Keyword dictionary, dataset registry, crosswalk and extraction patterns are unchanged.",
+  "notes": "Renamed organisation ORG-031 to High Conservation Value (HCV) Network, as corrected in Table A-1 of the guidebook (it printed High Carbon Value). The apa_author_form column is now chosen reproducibly; it changed for ORG-011 and ORG-043.",
   "files": {
-    "A1_organizations.csv": "b39bea19e156ba1f9afc21c10dd1b12568a298ad4e739760cbf6a36b68d88dcc",
+    "A1_organizations.csv": "a088da82eb59221c0200db91c0f7341f2bdcc156d06d9eda643d883c4cf8f53a",
     "B1_corpus_register.csv": "0f20972c755cb335f7066b032fcf2e5528e8c22c4643cd6e3caed7ca75523d83",
     "C1_dataset_registry.csv": "42959fed65f2afd49c754d12dba6241958d0e65dcdeb866120be79a4e7a1d48f",
     "dataset_extraction_patterns.csv": "70bad49076a31228890875fb4fe37cd02570806af627bb0339e13b30376969cc",

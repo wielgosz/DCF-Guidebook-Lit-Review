@@ -33,8 +33,7 @@ ORG_ALIASES = {  # published org name -> extra spellings used in APA author posi
     "World Resources Institute": ["World Resources Institute", "WRI"],
     "Carbon Disclosure Project (CDP.net)": ["CDP"],
     "Google Cloud and NGIS": ["Google & NGIS"],
-    # Table A-1 prints "High Carbon Value (HCV) Network"; Table B-1 cites "High Conservation Value Network".
-    "High Carbon Value (HCV) Network": ["High Conservation Value Network"],
+    "High Conservation Value (HCV) Network": ["High Conservation Value Network"],
     "Olam International Group": ["Olam Group"],
     "RaboFoundation": ["Rabo Foundation"],
     "UN Food and Agriculture Organization (FAO)": ["Food and Agriculture Organization of the United Nations",
@@ -99,7 +98,7 @@ def main():
             authors[oid].append(r["authors_or_orgs"])
     for o in org_rows:
         forms = authors[o["org_id"]]
-        o["apa_author_form"] = max(set(forms), key=forms.count) if forms else o["canonical_org_name"]
+        o["apa_author_form"] = max(sorted(set(forms)), key=forms.count) if forms else o["canonical_org_name"]  # ties: alphabetical, so rebuilds are reproducible
         o["linked_doc_ids"] = "; ".join(linked[o["org_id"]])
 
     def write(name, cols, rows):

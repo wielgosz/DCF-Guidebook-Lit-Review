@@ -2,7 +2,15 @@
 
 Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/). Versioning follows
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html). The tool is versioned with its reference
-tables: tool 2.4.0 ships tables 2.40.
+tables: tool 2.4.1 ships tables 2.41.
+
+## [2.4.1] - 2026-11-18
+
+### Fixed
+- Organisation ORG-031 is **High Conservation Value (HCV) Network**; Table A-1 and the default `A1_organizations.csv`
+  printed "High Carbon Value". Reference tables 2.41.
+- `tools/build_default_tables.py` chooses each organisation's `apa_author_form` reproducibly (most frequent form,
+  ties alphabetical). The value changed for ORG-011 and ORG-043.
 
 ## [2.4.0] - 2026-11-18
 

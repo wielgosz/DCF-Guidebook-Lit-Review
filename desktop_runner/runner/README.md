@@ -42,10 +42,10 @@ CSV files are UTF-8 with BOM, so they open correctly in Excel.
 
 ### Versioning
 
-The packaged tables are versioned with the tool: tool **2.4.0** ships tables
-**2.40**; a corrected or extended register is released as tool **2.4.1** /
-tables **2.41**. Each run reports either `packaged 2.40` or
-`custom, based on 2.40` (an edited copy), with the list of edited files.
+The packaged tables are versioned with the tool: tool **2.4.1** ships tables
+**2.41**; a corrected or extended register is released as tool **2.4.2** /
+tables **2.42**. Each run reports either `packaged 2.41` or
+`custom, based on 2.41` (an edited copy), with the list of edited files.
 
 To release an updated edition after editing the packaged CSVs:
 
