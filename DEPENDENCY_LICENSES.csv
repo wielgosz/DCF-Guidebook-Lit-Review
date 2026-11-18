@@ -1,0 +1,8 @@
+dependency,version,source_url,spdx_license,license_tier,direct_or_transitive,usage_scope,linkage_or_boundary,modified,distributed_to_customer,hosted_service_only,notice_required,source_disclosure_required,network_copyleft,patent_clause,commercial_restriction,outbound_license_compatible,replacement_candidate,review_status,notes
+pandas,>=2.0<3,https://github.com/pandas-dev/pandas,BSD-3-Clause,permissive,direct,runtime,import,no,yes,no,yes,no,no,no,no,yes,,green,DataFrames and Excel assembly
+openpyxl,>=3.1<4,https://foss.heptapod.net/openpyxl/openpyxl,MIT,permissive,direct,runtime,import,no,yes,no,yes,no,no,no,no,yes,,green,xlsx writer
+PyYAML,>=6.0,https://github.com/yaml/pyyaml,MIT,permissive,direct,runtime,import,no,yes,no,yes,no,no,no,no,yes,,green,figure style file
+pypdf,">=6.17,<6.18",https://github.com/py-pdf/pypdf,BSD-3-Clause,permissive,direct,runtime,import,no,yes,no,yes,no,no,no,no,yes,,green,PDF text-layer extraction; pinned narrowly because extraction drifts between releases
+matplotlib,>=3.7<4,https://github.com/matplotlib/matplotlib,Matplotlib-1.3.0 (BSD-style),permissive,direct,runtime,import,no,yes,no,yes,no,no,no,no,yes,,green,term-frequency figures; Agg backend only
+pytest,>=7.0,https://github.com/pytest-dev/pytest,MIT,permissive,direct,dev-only,none,no,no,no,no,no,no,no,no,yes,,green,test runner
+pyinstaller,>=6.0,https://github.com/pyinstaller/pyinstaller,GPL-2.0-or-later WITH bootloader-exception,copyleft-with-exception,direct,build-only,build tool,no,no,no,yes,no,no,no,no,yes,,green,desktop build only; not redistributed; exception allows shipping the frozen app under its own licence

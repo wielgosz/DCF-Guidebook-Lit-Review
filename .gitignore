@@ -1,0 +1,42 @@
+# Google Drive OAuth credentials - never commit these
+credentials.json
+token.json
+
+# Developer utility scripts
+push_to_github.bat
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data outputs (large files - commit selectively)
+/data/
+/results/
+
+# Desktop runner build artifacts
+desktop_runner/**/dist/
+desktop_runner/**/build/
+
+# desktop/ (.exe) build
+desktop/.build-venv/
+desktop/build/
+desktop/dist/

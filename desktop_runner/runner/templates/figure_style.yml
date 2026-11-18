@@ -1,0 +1,37 @@
+# Figure style for Figures 1-3 (horizontal bar charts of reports referencing each term).
+#
+# Style tokens in the spirit of a web stylesheet: change values here, not in code.
+# The defaults follow the figures used in earlier editions of the review (yellow
+# bars, axes-only frame, unnumbered titles). They are NOT an official WRI brand
+# specification - check colours and fonts against the current WRI brand guide and
+# edit this file (or pass your own copy with --figure-style).
+#
+# Reproducibility: the font must be one that ships with matplotlib (DejaVu Sans)
+# or is bundled with the runner, so output is identical on every machine.
+name: review-default
+version: "1.0"
+font:
+  family: DejaVu Sans
+  size: 9
+  title_size: 11
+  title_weight: bold
+colors:
+  bar: "#F0B310"
+  text: "#000000"
+  axis: "#4D4D4D"
+  value_label: "#000000"
+  background: "#FFFFFF"
+layout:
+  width_in: 7.2
+  row_height_in: 0.32
+  min_height_in: 3.2
+  extra_height_in: 1.4
+  bar_height: 0.55
+  value_labels: true
+  frame: axes_only        # left + bottom spines only
+  grid: false
+  title: true
+  x_padding_ratio: 1.08   # shared x-axis upper limit = max value x ratio
+output:
+  png_dpi: 200
+  formats: [svg, png]

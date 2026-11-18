@@ -1,0 +1,7 @@
+﻿setting,value,description
+matching_rule,exact_case_insensitive_regex_with_alphanumeric_boundaries,Keyword matching rule (fixed; recorded for provenance).
+figure_measure,reports_referencing,Figures 1-3 plot the number of reports referencing each term.
+run_keyword_analysis,TRUE,"Run keyword counts (Table D1, Figures 1-3)."
+run_dataset_crosswalk,TRUE,Run dataset-mention extraction and crosswalk (stages A-D).
+block_on_missing_pdf,TRUE,Treat a registered file missing from the PDF folder as an error that blocks the run.
+expected_active_terms,,Optional: number of active canonical terms the dictionary must contain (blank = no check).

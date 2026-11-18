@@ -1,0 +1,17 @@
+{
+  "tables_version": "2.40",
+  "tool_version": "2.4.0",
+  "released": "2026-11-18",
+  "notes": "Default corpus is now the published guidebook's: Table A-1 (69 organisations) and Table B-1 (125 references) from the final figure template (v8.6), with no file names, no earlier-run state, and empty exclusions and staging tables. Keyword dictionary, dataset registry, crosswalk and extraction patterns are unchanged.",
+  "files": {
+    "A1_organizations.csv": "b39bea19e156ba1f9afc21c10dd1b12568a298ad4e739760cbf6a36b68d88dcc",
+    "B1_corpus_register.csv": "0f20972c755cb335f7066b032fcf2e5528e8c22c4643cd6e3caed7ca75523d83",
+    "C1_dataset_registry.csv": "42959fed65f2afd49c754d12dba6241958d0e65dcdeb866120be79a4e7a1d48f",
+    "dataset_extraction_patterns.csv": "70bad49076a31228890875fb4fe37cd02570806af627bb0339e13b30376969cc",
+    "dataset_name_crosswalk.csv": "de98ebe2c3f9a4ec088e5b030b2a711649e73ba05d952bcdf1107ee42cf34f11",
+    "exclusions_duplicates.csv": "679fe0217ec039152e436c54871d7baa279c93c238b22d347b92eaf577af8237",
+    "keyword_dictionary.csv": "98fcd2adbd00036a220bd38352e229705735c389fbc1689756e9c03a7015cd67",
+    "new_documents.csv": "aad453bb6e3d82cdd83908144cf3fa11cb516a958d45672b1a6bbe994bb109b8",
+    "run_settings.csv": "50e56a576fe24eaaae9936a0e7ef4a0862fabdc9ea13633b5cdafa8ea02a8e9a"
+  }
+}

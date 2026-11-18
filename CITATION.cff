@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+message: "If you use this software or its outputs, please cite both the software and the guidebook below."
+title: "Supply Chain Data Review"
+abstract: >-
+  A desktop tool that turns a folder of PDFs into the corpus register, keyword counts, dataset-mention
+  crosswalk and publication tables of the guidebook's PRISMA-S-aligned literature review.
+type: software
+authors:
+  - family-names: Wielgosz
+    given-names: Benjamin
+version: "2.4.0"
+date-released: "2026-11-18"
+license: MIT
+repository-code: "https://github.com/wielgosz/DCF-Guidebook-Lit-Review"
+keywords:
+  - PRISMA-S
+  - literature review
+  - keyword search
+  - deforestation-free supply chains
+preferred-citation:
+  type: report
+  title: >-
+    Navigating data for deforestation and conversion free (DCF) supply chain analyses:
+    applied learnings from soy in Brazil
+  authors:
+    - {family-names: Wielgosz, given-names: Benjamin}
+    - {family-names: "dos Santos", given-names: "Ana Beatriz"}
+    - {family-names: Carter, given-names: Sarah}
+    - {family-names: Berger, given-names: Anika}
+    - {family-names: Schneider, given-names: Martina}
+    - {family-names: Despontin, given-names: Maiara}
+    - {family-names: Immelman, given-names: Jessica}
+    - {family-names: Richter, given-names: Jessica}
+    - {family-names: Couto, given-names: Antonio}
+    - {family-names: Fitts, given-names: "Lucia A."}
+    - {family-names: Gao, given-names: Yufan}
+    - {family-names: Dionizio, given-names: Emily}
+  publisher:
+    name: World Resources Institute
+  year: 2026

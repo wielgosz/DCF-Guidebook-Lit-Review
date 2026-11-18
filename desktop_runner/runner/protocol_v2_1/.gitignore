@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+data/raw_pdfs/**
+data/extracted_text/**
+outputs/**
+!outputs/reference_milestone/**

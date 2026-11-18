@@ -1,0 +1,10 @@
+{
+  "name": "Supply Chain Data Review desktop runner",
+  "version_source": "protocol_engine/__init__.py",
+  "reference_tables": "reference_tables/ (version: reference_tables/TABLES_VERSION.json)",
+  "publication_template": "templates/Publication_Template.xlsx",
+  "figure_style": "templates/figure_style.yml",
+  "backend_scripts": "protocol_v2_1/scripts (run in-process)",
+  "gui": "Tkinter",
+  "packaging": "PyInstaller onedir (SupplyChainDataReview.spec)"
+}

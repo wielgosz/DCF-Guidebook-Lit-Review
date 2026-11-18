@@ -1,0 +1,182 @@
+pattern_type,pattern,family_or_note
+seed_term,PRODES,forest/land-cover monitoring dataset
+seed_term,PRODES Amazonia,forest/land-cover monitoring dataset
+seed_term,PRODES Amazônia,forest/land-cover monitoring dataset
+seed_term,PRODES Cerrado,forest/land-cover monitoring dataset
+seed_term,DETER,forest/land-cover monitoring dataset
+seed_term,TerraClass,forest/land-cover monitoring dataset
+seed_term,MapBiomas,forest/land-cover monitoring dataset
+seed_term,CAR,official registry / boundary / compliance list
+seed_term,SICAR,official registry / boundary / compliance list
+seed_term,Cadastro Ambiental Rural,official registry / boundary / compliance list
+seed_term,Rural Environmental Registry,seed term
+seed_term,IBAMA,official registry / boundary / compliance list
+seed_term,Embargo list,official registry / boundary / compliance list
+seed_term,slave labor list,official registry / boundary / compliance list
+seed_term,Lista Suja,seed term
+seed_term,INCRA,official registry / boundary / compliance list
+seed_term,SNCI,official registry / boundary / compliance list
+seed_term,SIGEF,official registry / boundary / compliance list
+seed_term,FUNAI,official registry / boundary / compliance list
+seed_term,Indigenous Lands,official registry / boundary / compliance list
+seed_term,Terras Indígenas,seed term
+seed_term,Conservation Units,official registry / boundary / compliance list
+seed_term,Unidades de Conservação,seed term
+seed_term,WDPA,official registry / boundary / compliance list
+seed_term,World Database on Protected Areas,seed term
+seed_term,Global Forest Watch,forest/land-cover monitoring dataset
+seed_term,GFW,forest/land-cover monitoring dataset
+seed_term,GFW Pro,forest/land-cover monitoring dataset
+seed_term,Global Forest Change,forest/land-cover monitoring dataset
+seed_term,Hansen,forest/land-cover monitoring dataset
+seed_term,Hansen tree cover loss,forest/land-cover monitoring dataset
+seed_term,tree cover loss,seed term
+seed_term,GLAD,forest/land-cover monitoring dataset
+seed_term,GLAD alerts,forest/land-cover monitoring dataset
+seed_term,RADD,forest/land-cover monitoring dataset
+seed_term,RADD alerts,forest/land-cover monitoring dataset
+seed_term,VIIRS,remote sensing imagery/source
+seed_term,MODIS,remote sensing imagery/source
+seed_term,Landsat,remote sensing imagery/source
+seed_term,Sentinel,remote sensing imagery/source
+seed_term,Sentinel-1,remote sensing imagery/source
+seed_term,Sentinel-2,remote sensing imagery/source
+seed_term,Copernicus,remote sensing imagery/source
+seed_term,SRTM,remote sensing imagery/source
+seed_term,OpenStreetMap,seed term
+seed_term,GeoRSPO,platform/tool/derived dataset
+seed_term,Universal Mill List,platform/tool/derived dataset
+seed_term,UML,seed term
+seed_term,Trase,platform/tool/derived dataset
+seed_term,SEI-PCS,platform/tool/derived dataset
+seed_term,SEI PCS,platform/tool/derived dataset
+seed_term,Forest 500,platform/tool/derived dataset
+seed_term,Whisp,platform/tool/derived dataset
+seed_term,JRC Global Surface Water,seed term
+seed_term,JRC,seed term
+seed_term,FAOSTAT,seed term
+seed_term,Agrosatélite,seed term
+seed_term,Agrosatelite,seed term
+seed_term,MapHubs,seed term
+seed_term,HCV assessments,assessment framework / dataset-like source
+seed_term,HCSA assessments,assessment framework / dataset-like source
+seed_term,HCVRN,assessment framework / dataset-like source
+seed_term,HCV Network,assessment framework / dataset-like source
+seed_term,High Carbon Stock Approach,official registry / boundary / compliance list
+seed_term,HCSA,assessment framework / dataset-like source
+seed_term,High Conservation Value,assessment framework / dataset-like source
+seed_term,HCV,assessment framework / dataset-like source
+seed_term,Preferred by Nature Sourcing Hub,platform/tool/derived dataset
+seed_term,Sourcing Hub,platform/tool/derived dataset
+seed_term,RSPO ACOP,platform/tool/derived dataset
+seed_term,ACOP,platform/tool/derived dataset
+seed_term,GPSNR reporting data,platform/tool/derived dataset
+seed_term,Global Coffee Platform Equivalence Mechanism,platform/tool/derived dataset
+seed_term,Equivalence Mechanism,platform/tool/derived dataset
+seed_term,Open Foris,seed term
+seed_term,Collect Earth,seed term
+seed_term,SEPAL,seed term
+seed_term,Google Earth Engine,seed term
+seed_term,Earth Engine,seed term
+seed_term,NICFI,remote sensing imagery/source
+seed_term,Planet,remote sensing imagery/source
+seed_term,NASA,remote sensing imagery/source
+seed_term,USGS,remote sensing imagery/source
+seed_term,ESA,remote sensing imagery/source
+seed_term,Google Maps,seed term
+seed_term,Bing Maps,seed term
+seed_term,Mapbox,seed term
+seed_term,OSM,seed term
+seed_term,GRASS,seed term
+seed_term,QGIS,seed term
+seed_term,ArcGIS,seed term
+seed_term,IBGE,official registry / boundary / compliance list
+seed_term,CNFP,seed term
+seed_term,PASTEM,seed term
+seed_term,LAPIG,seed term
+seed_term,FREL,seed term
+seed_term,SAD,forest/land-cover monitoring dataset
+seed_term,Imazon,seed term
+seed_term,MapBiomas Alerta,forest/land-cover monitoring dataset
+seed_term,MapBiomas Alert,forest/land-cover monitoring dataset
+seed_term,MapBiomas Fire,forest/land-cover monitoring dataset
+seed_term,MapBiomas Fogo,forest/land-cover monitoring dataset
+seed_term,MapBiomas Collection,forest/land-cover monitoring dataset
+seed_term,MapBiomas Coleção,forest/land-cover monitoring dataset
+seed_term,Rapid Response Monitoring,seed term
+seed_term,SIRAD,forest/land-cover monitoring dataset
+seed_term,Cerrado Deforestation Monitoring,forest/land-cover monitoring dataset
+seed_term,Amazon Soy Moratorium,seed term
+seed_term,Soy Moratorium,seed term
+seed_term,Agroideal,platform/tool/derived dataset
+seed_term,Agroicone,seed term
+seed_term,Terra-i,seed term
+seed_term,Deforestation Alert System,forest/land-cover monitoring dataset
+seed_term,SAD alerts,forest/land-cover monitoring dataset
+generic_dataset_cue,data source,generic cue; requires manual/canonical review
+generic_dataset_cue,data sources,generic cue; requires manual/canonical review
+generic_dataset_cue,dataset,generic cue; requires manual/canonical review
+generic_dataset_cue,datasets,generic cue; requires manual/canonical review
+generic_dataset_cue,data set,generic cue; requires manual/canonical review
+generic_dataset_cue,data sets,generic cue; requires manual/canonical review
+generic_dataset_cue,database,generic cue; requires manual/canonical review
+generic_dataset_cue,databases,generic cue; requires manual/canonical review
+generic_dataset_cue,geospatial data,generic cue; requires manual/canonical review
+generic_dataset_cue,spatial data,generic cue; requires manual/canonical review
+generic_dataset_cue,GIS data,generic cue; requires manual/canonical review
+generic_dataset_cue,GIS layer,generic cue; requires manual/canonical review
+generic_dataset_cue,GIS layers,generic cue; requires manual/canonical review
+generic_dataset_cue,map layer,generic cue; requires manual/canonical review
+generic_dataset_cue,map layers,generic cue; requires manual/canonical review
+generic_dataset_cue,shapefile,generic cue; requires manual/canonical review
+generic_dataset_cue,shapefiles,generic cue; requires manual/canonical review
+generic_dataset_cue,satellite imagery,generic cue; requires manual/canonical review
+generic_dataset_cue,satellite images,generic cue; requires manual/canonical review
+generic_dataset_cue,satellite image,generic cue; requires manual/canonical review
+generic_dataset_cue,satellite data,generic cue; requires manual/canonical review
+generic_dataset_cue,remote sensing data,generic cue; requires manual/canonical review
+generic_dataset_cue,remote sensing imagery,generic cue; requires manual/canonical review
+generic_dataset_cue,remote sensing product,generic cue; requires manual/canonical review
+generic_dataset_cue,remote sensing products,generic cue; requires manual/canonical review
+generic_dataset_cue,risk map,generic cue; requires manual/canonical review
+generic_dataset_cue,risk maps,generic cue; requires manual/canonical review
+generic_dataset_cue,deforestation map,generic cue; requires manual/canonical review
+generic_dataset_cue,deforestation maps,generic cue; requires manual/canonical review
+generic_dataset_cue,deforestation data,generic cue; requires manual/canonical review
+generic_dataset_cue,deforestation dataset,generic cue; requires manual/canonical review
+generic_dataset_cue,deforestation datasets,generic cue; requires manual/canonical review
+generic_dataset_cue,deforestation layer,generic cue; requires manual/canonical review
+generic_dataset_cue,deforestation layers,generic cue; requires manual/canonical review
+generic_dataset_cue,deforestation alert,generic cue; requires manual/canonical review
+generic_dataset_cue,deforestation alerts,generic cue; requires manual/canonical review
+generic_dataset_cue,land cover map,generic cue; requires manual/canonical review
+generic_dataset_cue,land cover maps,generic cue; requires manual/canonical review
+generic_dataset_cue,land cover data,generic cue; requires manual/canonical review
+generic_dataset_cue,land cover dataset,generic cue; requires manual/canonical review
+generic_dataset_cue,land cover datasets,generic cue; requires manual/canonical review
+generic_dataset_cue,land use map,generic cue; requires manual/canonical review
+generic_dataset_cue,land use maps,generic cue; requires manual/canonical review
+generic_dataset_cue,land use data,generic cue; requires manual/canonical review
+generic_dataset_cue,land use dataset,generic cue; requires manual/canonical review
+generic_dataset_cue,land use datasets,generic cue; requires manual/canonical review
+generic_dataset_cue,boundary data,generic cue; requires manual/canonical review
+generic_dataset_cue,boundary dataset,generic cue; requires manual/canonical review
+generic_dataset_cue,boundary datasets,generic cue; requires manual/canonical review
+generic_dataset_cue,boundary layer,generic cue; requires manual/canonical review
+generic_dataset_cue,boundary layers,generic cue; requires manual/canonical review
+generic_dataset_cue,boundary map,generic cue; requires manual/canonical review
+generic_dataset_cue,boundary maps,generic cue; requires manual/canonical review
+generic_dataset_cue,polygon data,generic cue; requires manual/canonical review
+generic_dataset_cue,polygon dataset,generic cue; requires manual/canonical review
+generic_dataset_cue,polygon datasets,generic cue; requires manual/canonical review
+generic_dataset_cue,polygon file,generic cue; requires manual/canonical review
+generic_dataset_cue,polygon files,generic cue; requires manual/canonical review
+generic_dataset_cue,polygon layer,generic cue; requires manual/canonical review
+generic_dataset_cue,polygon layers,generic cue; requires manual/canonical review
+generic_dataset_cue,concession data,generic cue; requires manual/canonical review
+generic_dataset_cue,concession dataset,generic cue; requires manual/canonical review
+generic_dataset_cue,concession datasets,generic cue; requires manual/canonical review
+generic_dataset_cue,concession map,generic cue; requires manual/canonical review
+generic_dataset_cue,concession maps,generic cue; requires manual/canonical review
+generic_dataset_cue,concession boundary,generic cue; requires manual/canonical review
+generic_dataset_cue,concession boundaries,generic cue; requires manual/canonical review
